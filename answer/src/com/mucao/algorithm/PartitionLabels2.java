@@ -4,6 +4,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**leecode problem address: https://github.com/mucao/leetcode/tree/master/answer
+ *
+ * 思想：先找到每一个字符在字符串中出现的第一个位置和最后一个位置
+ *      然后，按照第一次出现位置从小到大的顺序遍历涉及到的字符。
+ *      一个part的结束位置，一定包含所有这个part结束位置，所以
+ *      遍历的时候，更新当前part的结束位置。直到某一个字符的开始位置大于当前part的结束位置，
+ *      那么则找到了一个part。
+ */
 public class PartitionLabels2 {
 
     public static void main(String[] args) {
