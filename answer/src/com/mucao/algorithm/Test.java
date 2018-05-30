@@ -8,7 +8,8 @@ public class Test {
 
     public static void main(String[] args) {
 
-
+        List<Integer> list = new ArrayList<>();
+        list.add(1, 1);
 
         /*int[] intarray = {1, 2, 3, 4, 5};
         List<Integer> list = Arrays.asList(intarray); 编译通不过
