@@ -5,13 +5,18 @@ package com.mucao.algorithm;
  * 题目地址：https://leetcode.com/problems/repeated-substring-pattern/description/
  *
  * 用两个串来搞！
+ *
+ * 24ms 21ms 27ms 25ms
  */
-public class _459_Repeated_Substring_Pattern {
+public class _459_Repeated_Substring_Pattern_2 {
+
 
     public static void main(String[] args) {
 
         //String s = "abaababaab";
-        String s = "aabaaba";
+//        String s = "aabaaba";
+//        String s = "abababaabababaabababa";
+        String s = "aaaa";
         boolean result = repeatedSubstringPattern(s);
         System.out.println("result -> :"+result);
     }
@@ -33,22 +38,52 @@ public class _459_Repeated_Substring_Pattern {
             return false;
         }
 
-            //寻找子串
-        int p_head = 0;
-        String subStr = null;
-        while((subStr=findSubString(s, p_head))!=null){
-            //开始检验
-            if (checkSubString(s, subStr)){
-                return true;
-            }else {
-                p_head = p_head+subStr.length();
+        //找到一个合适的子串
+        int sub_end=0;
+        while (sub_end<(s.length()/2)){
+
+            if(findSubString(s, sub_end)){//验证0-sub_end是不是一个合格子串
+                //开始验证找到的字串是否符合题目要求
+                if(checkSubString(s, sub_end)){
+                    return true;
+                }
             }
+            sub_end++;
         }
+
 
         return false;
     }
 
-    public static boolean checkSubString(String s, String subStr){
+    public static boolean checkSubString(String s, int sub_end){
+
+        if(s.length()%(sub_end+1)!=0)  return false;
+
+        for (int i = sub_end+1; i <= (s.length()-sub_end-2); i++) {
+            if(s.charAt(i)!=s.charAt(i%(sub_end+1))) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public static boolean findSubString(String s, int sub_end){
+
+        for (int p_1 = sub_end, p_2 = s.length()-1; p_1 >=0&&p_2>sub_end ; p_1--,p_2--) {
+            if(s.charAt(p_1)!=s.charAt(p_2)){
+                return false;
+            }
+
+            if(p_1==0&&p_2>sub_end){
+                return  true;
+            }
+        }
+        return false;
+    }
+
+
+  /*  public static boolean checkSubString(String s, String subStr){
 
         int s_cur=0;
         int sub_len = subStr.length();
@@ -64,9 +99,9 @@ public class _459_Repeated_Substring_Pattern {
         }else {
             return false;
         }
-    }
+    }*/
 
-    public static String findSubString(String s, int p_head){
+   /* public static String findSubString(String s, int p_head){
         int p_tail = s.length()-1;
         int p_head_c = p_head;
         while(p_head_c<p_tail){
@@ -94,7 +129,7 @@ public class _459_Repeated_Substring_Pattern {
         }
 
         return null;
-    }
+    }*/
 
 
 }
