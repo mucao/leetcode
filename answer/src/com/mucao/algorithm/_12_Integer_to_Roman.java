@@ -21,6 +21,16 @@ public class _12_Integer_to_Roman {
     private static String[] str_100 = {"", "C", "CC", "CCC","CD","D","DC","DCC","DCCC","CM"};//百位
     private static String[] str_10 = {"", "X", "XX", "XXX","XL","L","LX","LXX","LXXX","XC"};//十位
     private static String[] str_1 = {"", "I", "II", "III","IV","V","VI","VII","VIII","IX"};//个位
+    public static String intToRoman3(int num) {
+        String M[] = {"", "M", "MM", "MMM"};
+        String C[] = {"", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"};
+        String X[] = {"", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"};
+        String I[] = {"", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"};
+        StringBuilder strB = new StringBuilder();
+        strB.append(M[num / 1000]).append(C[(num % 1000) / 100]).append(X[(num % 100) / 10]).append(I[num % 10]);
+        return strB.toString();
+    }
+
 
     public static String intToRoman2(int num) {//使用 String 48ms
         if(num < 1 || num >3999){
